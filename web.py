@@ -1,5 +1,6 @@
+# @Author: Fadi Hanna Al-Kass (ceo@shaykeapp.com)
+
 from flask import Flask, render_template
-from config import DATABASE_FILE_NAME
 
 
 webApp = Flask("", template_folder='templates', static_folder='static')

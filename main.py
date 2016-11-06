@@ -1,8 +1,22 @@
+# @Author: Fadi Hanna Al-Kass (ceo@shaykeapp.com)
 
-from api import webApp
-from config import HOST, PORT, DEBUG
+import rethinkdb as rdb
+from api import run
+from config import configs
 
 
 if __name__ == "__main__":
-    print(" * HOST: %s, PORT: %d, DEBUG: %s" % (HOST, PORT, DEBUG))
-    webApp.run(host=HOST, port=PORT, debug=DEBUG)
+    # Establish connection with the database engine
+    rdb.connect(configs["RETHINKDB"]["HOST"], configs["RETHINKDB"]["PORT"]).repl()
+
+    # Create the required database and tables
+
+
+    # Run the server
+    run\
+    (
+        host = configs["SERVER"]["HOST"],
+        port = configs["SERVER"]["PORT"],
+        debug = configs["SERVER"]["DEBUG"],
+        rdb = rdb
+    )
