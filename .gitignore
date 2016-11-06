@@ -90,4 +90,4 @@ ENV/
 .ropeprojec
 
 # Database files
-rethinkdb-*
+*.db
