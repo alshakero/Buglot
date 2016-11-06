@@ -90,6 +90,7 @@ ENV/
 .ropeprojec
 
 # Database files
+rethinkdb_data/
 *.db
 
 # Vagrant files
