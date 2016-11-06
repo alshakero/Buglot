@@ -1,6 +1,6 @@
 # @Author: Fadi Hanna Al-Kass (ceo@shaykeapp.com)
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 
 
 webApp = Flask("", template_folder='templates', static_folder='static')
@@ -11,4 +11,4 @@ def index():
 
 @webApp.errorhandler(404)
 def page_not_found(e):
-    return render_template("index.html"), 200
+    return redirect("/", code=302)
