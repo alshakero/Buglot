@@ -17,7 +17,7 @@ class Query(Resource):
     def get(self):
         shortuuid.set_alphabet("1234567890")
         dummyJsonList = []
-        for i in range(20):
+        for i in range(10):
             dummyJson =\
             {
                 "_id" : shortuuid.uuid()[0:10],
