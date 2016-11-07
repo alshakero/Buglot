@@ -11,7 +11,8 @@ $(document).ready(function() {
       }
       else
       {
-        $(".centeredText").html("There are no defects");
+        $(".loading").children().children(".loadingImage").hide();
+        $(".loading").children().children().html("There are no defects");
       }
     }
 
