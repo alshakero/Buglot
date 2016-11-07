@@ -1,3 +1,4 @@
+shortuuid
 flask
 flask_restful
 rethinkdb

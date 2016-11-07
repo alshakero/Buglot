@@ -11,15 +11,56 @@
     <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
     <link rel="icon" href="static/img/favicon.png">
     <title>Buglot - Collect Defects Automatically</title>
+    <style media="screen">
+        div .loading {
+            height: 200px;
+            width: 400px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -200px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h1>All Defects</h1>
+                <h1>
+                  Reported Defects
+                </h1>
                 <hr>
             </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label>
+              <input type="checkbox">
+              &nbsp;Reported
+            </label>
+            <hr>
+          </div>
+          <div class="col-md-2">
+            <label>
+              <input type="checkbox">
+              &nbsp;Review
+            </label>
+            <hr>
+          </div>
+          <div class="col-md-2">
+            <label>
+              <input type="checkbox">
+              &nbsp;Resolved
+            </label>
+            <hr>
+          </div>
+          <div class="col-md-5">
+          </div>
+          <div class="col-md-1">
+            <button class="ReloadButton" type="button" name="button">Reload</button>
+          </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -36,50 +77,67 @@
                             <th>Defect Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- THIS SECTION IS ALTERED BY A JSON 'GET' REQUEST -->
-                    </tbody>
+                    <div class="loading">
+                        <!--
+                            THIS SECTION IS LOADED AT THE CENTER OF THE PAGE AND WILL BE
+                            DELETED BY JQUERY PRIOR TO LOADING THE DEFECT LIST
+                        -->
+                        <center>
+                            <h1>
+                            Loading. Please Wait.
+                          </h1>
+                        </center>
+                    </div>
+                    <!-- THIS SECTION IS ALTERED BY A JSON 'GET' REQUEST -->
                 </table>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-      $.getJSON("/query/", data, success);
-      function data(_data)
-      {
-        _data.forEach(handleDefect);
-      }
-      function success(data)
-      {
+        $.getJSON("/query/", data, success);
 
-      }
-      function handleDefect(defect)
-      {
-        $("tbody").append(
-          '<tr class=' + getClassTypeFromStatus(defect.status) + '>' +
-          '<td>' + defect._id + '</td>' +
-          '<td>' + defect.platform + '</td>' +
-          '<td>' + defect.exception_type + '</td>' +
-          '<td>' + defect.class + '</td>' +
-          '<td>' + defect.function + '</td>' +
-          '<td>' + defect.line_num + '</td>' +
-          '<td>' + defect.num_reports + '</td>' +
-          '<td>' + defect.status + '</td>' +
-          '/tr>'
-        );
-      }
-      function getClassTypeFromStatus(status)
-      {
-        switch (status)
-        {
-          case "Reported":
-            return "danger";
-          case "Resolved":
-            return "success";
-          default:
-            return "info";
+        function data(_data) {
+            $(".loading").remove();
+            $(".table").append('<tbody>');
+            _data.forEach(handleDefectItem);
+            $(".table").append('</tbody>');
         }
-      }
+
+        function success(data) {
+            /* nothing to be done in the meantime */
+        }
+
+        function handleDefectItem(defect) {
+            $("tbody").append(
+                '<tr class=' + getClassTypeFromStatus(defect.status) + '>' +
+                '<td>' + defect._id + '</td>' +
+                '<td>' + defect.platform + '</td>' +
+                '<td>' + defect.exception_type + '</td>' +
+                '<td>' + defect.class + '</td>' +
+                '<td>' + defect.function+'</td>' +
+                '<td>' + defect.line_num + '</td>' +
+                '<td>' + defect.num_reports + '</td>' +
+                '<td>' + defect.status + '</td>' +
+                '/tr>'
+            );
+        }
+
+        function getClassTypeFromStatus(status) {
+            switch (status) {
+                case "Reported":
+                    return "danger";
+                case "Resolved":
+                    return "success";
+                default:
+                    return "info";
+            }
+        }
+
+        $(".ReloadButton").click(function(){
+          $(this).fadeOut(function(){
+            /*more specific search*/
+          });
+        });
     </script>
 </body>
 

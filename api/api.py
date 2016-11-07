@@ -2,6 +2,7 @@
 
 from flask_restful import Resource, Api
 from random import randint
+import shortuuid
 from web import webApp
 
 
@@ -14,11 +15,12 @@ api.add_resource(SubmitHandler, "/submit/")
 
 class Query(Resource):
     def get(self):
+        shortuuid.set_alphabet("1234567890")
         dummyJsonList = []
-        for i in range(10):
+        for i in range(20):
             dummyJson =\
             {
-                "_id" : i,
+                "_id" : shortuuid.uuid()[0:10],
                 "platform" : ("Android", "iOS")[randint(0, 1)],
                 "exception_type" : ("IOException", "NetworkAdapterException", "IntentException", "InvalidParameterException")[randint(0, 3)],
                 "class" : ("MainActivity", "MediaHandler", "Camera")[randint(0, 2)],
