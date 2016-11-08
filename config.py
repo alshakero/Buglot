@@ -13,7 +13,7 @@ configs = {}
 configs["SERVER"] = {}
 configs["SERVER"]["HOST"] = config.get("SERVER", "HOST")
 configs["SERVER"]["PORT"] = int(config.get("SERVER", "PORT"))
-configs["SERVER"]["DEBUG"] = config.get("SERVER", "DEBUG").lower() in ["true", "yes"]
+configs["SERVER"]["DEBUG"] = config.get("SERVER", "DEBUG").upper() in ("TRUE", "YES")
 
 configs["RETHINKDB"] = {}
 configs["RETHINKDB"]["HOST"] = config.get("RETHINKDB", "HOST")
