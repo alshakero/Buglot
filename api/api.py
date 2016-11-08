@@ -22,6 +22,7 @@ class Query(Resource):
             {
                 "_id" : shortuuid.uuid()[0:10],
                 "platform" : ("Android", "iOS")[randint(0, 1)],
+                "release" : ("1.0.0", "1.7.0", "2.0.2", "3.5.2", "7.1.0")[randint(0, 4)],
                 "exception_type" : ("IOException", "NetworkAdapterException", "IntentException", "InvalidParameterException")[randint(0, 3)],
                 "class" : ("MainActivity", "MediaHandler", "Camera")[randint(0, 2)],
                 "function" : ("onCreate", "onStart", "onPause", "onResume", "onDestroy", "loadFragment", "loadImage", "startCamera", "sendRawRecording")[randint(0, 8)],

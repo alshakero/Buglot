@@ -2,18 +2,15 @@ $(document).ready(function() {
     $.getJSON("/query/", data, success);
 
     function data(_data) {
-      if (_data.length > 0)
-      {
-        $(".loading").remove();
-        $(".table").append('<tbody>');
-        _data.forEach(handleDefectItem);
-        $(".table").append('</tbody>');
-      }
-      else
-      {
-        $(".loading").children().children(".loadingImage").hide();
-        $(".loading").children().children().html("There are no defects");
-      }
+        if (_data.length > 0) {
+            $(".loading").remove();
+            $(".table").append('<tbody>');
+            _data.forEach(handleDefectItem);
+            $(".table").append('</tbody>');
+        } else {
+            $(".loading").children().children(".loadingImage").hide();
+            $(".loading").children().children().html("There are no defects");
+        }
     }
 
     function success(data) {
@@ -25,6 +22,7 @@ $(document).ready(function() {
             '<tr class=' + getClassTypeFromStatus(defect.status) + '>' +
             '<td>' + defect._id + '</td>' +
             '<td>' + defect.platform + '</td>' +
+            '<td>' + defect.release + '</td>' +
             '<td>' + defect.exception_type + '</td>' +
             '<td>' + defect.class + '</td>' +
             '<td>' + defect.function+'</td>' +

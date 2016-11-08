@@ -7,7 +7,7 @@ from config import configs
 
 if __name__ == "__main__":
     # Establish connection with the database engine
-    rdb.connect(configs["RETHINKDB"]["HOST"], configs["RETHINKDB"]["PORT"]).repl()
+#    rdb.connect(configs["RETHINKDB"]["HOST"], configs["RETHINKDB"]["PORT"]).repl()
 
     # Create the required database and tables
 
